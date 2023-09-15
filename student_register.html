@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Register</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: sans-serif;
+            /* background-color: #e5e5f7; */
+            min-width: none;
+            /* background-image: radial-gradient( ellipse farthest-corner at 10px 10px , #444df77e, #444df73a 50%, #e5e5f7 50%);
+            background-size: 10px 10px; */
+            justify-content: center;
+            background-color: #e5e5f7;
+    background-image:  linear-gradient(30deg, #f7514580 12%, transparent 12.5%, transparent 87%, #f7514580 87.5%, #f7514555), linear-gradient(150deg, #f7514573 12%, transparent 12.5%, transparent 87%, #f7514580 87.5%, #f751456e), linear-gradient(30deg, #f7514569 12%, transparent 12.5%, transparent 87%, #f7514569 87.5%, #f7514569), linear-gradient(150deg, #f7514569 12%, transparent 12.5%, transparent 87%, #f7514569 87.5%, #f7514569), linear-gradient(60deg, #f7524577 25%, transparent 25.5%, transparent 75%, #f7524577 75%, #f7524577), linear-gradient(60deg, #f7524577 25%, transparent 25.5%, transparent 75%, #f7524577 75%, #f7524577);
+    background-size: 20px 35px;
+    background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
+
+
+        }
+        .header {
+            background: white;
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 5px;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 20px;
+            padding-left: 20px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+            
+
+        }
+        a {
+            text-decoration: none;
+        }
+        button {
+            padding: 3px;
+            background: none;
+            border: solid;
+            font-size: larger;
+            border-radius: 8px;
+            border-width: 0.15rem;
+            cursor: pointer;
+        }
+        button:hover{
+            border-color: red;
+            color: red;
+        }
+        .main-cont {
+            margin-top: 50px;
+            display: flex;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            border-radius: 8px;
+            justify-content: space-between;
+            align-items: center;
+
+        }
+        .col-sel,
+        .dep-sel,
+        .yr-sel {
+            margin-left: 5px;
+            margin-right: 5px;
+
+        }
+        .stud {
+            margin: 0;
+        }
+        option {
+            border-radius: 8px;
+            border: none;
+        }
+        img {
+            height: 40px;
+        }
+        #studentList {
+            display: flex;
+
+        }
+        ul {
+            font-size: large;
+        }
+        li {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px;
+            border-radius: 8px;
+            border-bottom: solid;
+            border-width: 0.1rem;
+            min-width: 500px;
+            
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"><img src="download.jfif" alt=""><a href="edit_students.html"><button>Admin Panel</button></a></div>
+    
+    <div class="main-cont">
+    <h1 class="stud">Student Register</h1>
+
+    <!-- College Selection -->
+    <div class="col-sel">
+        <label for="college">Select College:</label>
+        <select id="college" onchange="updateDepartmentsAndYears()">
+            <option value="engineering">College of Engineering</option>
+            <option value="nat-sciences">College of Natural and Applied Sciences</option>
+            <option value="man-sciences">College of Management Sciences</option>
+            <option value="env-sciences">College of Environmental Sciences</option>
+        </select>
+    </div>
+
+
+    <!-- Department Selection -->
+    <div class="dep-sel">
+        <label for="department">Select Department:</label>
+        <select id="department">
+            <option data-college="engineering" value="info" disabled>-- Departments for Engineering --</option>
+            <option data-college="engineering" value="mechanical">Mechanical Engineering</option>
+            <option data-college="engineering" value="electrical">Electrical/Electronics & Telecommunications Engineering</option>
+            <option data-college="engineering" value="mechatronics">Mechatronics Engineering</option>
+            <option data-college="engineering" value="biomed">Biomedical Engineering</option>
+            <option data-college="engineering" value="computereng">Computer Engineering</option>
+            <option data-college="engineering" value="civil">Civil & Environmental Engineering</option>
+            
+            <!-- Departments for Natural Sciences -->
+            <option data-college="nat-sciences" value="info" disabled>-- Departments for Natural Sciences --</option>
+            <option data-college="nat-sciences" value="physics">Physics with Electronics</option>
+            <option data-college="nat-sciences" value="maths">Applied Mathematics & Statistics</option>
+            <option data-college="nat-sciences" value="indchemistry">Industrial Chemistry</option>
+            <option data-college="nat-sciences" value="biochemistry">Biochemistry</option>
+            <option data-college="nat-sciences" value="chemistry">Chemistry</option>
+            <option data-college="nat-sciences" value="microbiology">Microbiology</option>
+            <option data-college="nat-sciences" value="aquaculture">Aquaculture & Fisheries Mgt</option>
+            <option data-college="nat-sciences" value="computersci">Computer Science</option>
+            <option data-college="nat-sciences" value="information">Information Technology</option>
+            <option data-college="nat-sciences" value="food">Food Technology</option>
+            <option data-college="nat-sciences" value="biotech">Biotechnology</option>
+            <option data-college="nat-sciences" value="nutrition">Nutrition and Dietetics</option>
+    
+            <!-- Departments for Management Sciences -->
+            <option data-college="man-sciences" value="info" disabled>-- Departments for Management Sciences --</option>
+            <option data-college="man-sciences" value="business">Business Computing</option>
+            <option data-college="man-sciences" value="human">Human Resources Management</option>
+            <option data-college="man-sciences" value="international">International Business</option>
+            <option data-college="man-sciences" value="project">Project management</option>
+            <option data-college="man-sciences" value="transport">Transport Management & Logistics</option>
+            <option data-college="man-sciences" value="accounting">Accounting</option>
+            <option data-college="man-sciences" value="banking">Banking and finance</option>
+            <option data-college="man-sciences" value="economics">Economics</option>
+    
+            <!-- Departments for Environmental Sciences -->
+            <option data-college="env-sciences" value="info" disabled>-- Departments for Environmental Sciences --</option>
+            <option data-college="env-sciences" value="archi">Architecture</option>
+            <option data-college="env-sciences" value="building">Building Technology</option>
+            <option data-college="env-sciences" value="estate">Estate Management</option>
+            <option data-college="env-sciences" value="quantity">Quantity Surveying</option>
+            <option data-college="env-sciences" value="survey">Surveying and Geoinformatics</option>
+            <option data-college="env-sciences" value="urban">Urban and Regional Planning</option>
+    
+        </select>
+    </div>
+
+
+    <!-- Year Selection -->
+    <div class="yr-sel">
+        <label for="year">Select Year:</label>
+        <select id="year">
+            <option value="1">Year 1</option>
+            <option value="2">Year 2</option>
+            <option value="3">Year 3</option>
+            <option value="4">Year 4</option>
+            <option value="4">Year 5</option>
+        </select>
+    </div>
+
+
+    <button onclick="displayStudents()">Display Students</button>
+    </div>
+
+    <div id="studentList">
+        <!-- Student names will be displayed here -->
+    </div>
+
+    <script>
+        function displayStudents() {
+            // Retrieve selected values
+            const college = document.getElementById("college").value;
+            const department = document.getElementById("department").value;
+            const year = document.getElementById("year").value;
+
+            // Retrieve students from localStorage
+            const students = JSON.parse(localStorage.getItem("students")) || [];
+
+            // Filter students based on selected criteria
+            const filteredStudents = students.filter(student => {
+                return student.college === college &&
+                    student.department === department &&
+                    student.year === year;
+            });
+
+            // Display the filtered students
+            const studentList = document.getElementById("studentList");
+            studentList.innerHTML = "<h2>Students:</h2>";
+            if (filteredStudents.length === 0) {
+                studentList.innerHTML += "No students found for the selected criteria.";
+            } else {
+                const ul = document.createElement("ul");
+                filteredStudents.forEach(student => {
+                    const li = document.createElement("li");
+                    li.textContent = student.name;
+                    ul.appendChild(li);
+                });
+                studentList.appendChild(ul);
+            }
+        }
+    </script>
+</body>
+</html>

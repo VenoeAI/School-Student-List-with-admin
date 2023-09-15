@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            display: flex;
+            font-family: sans-serif;
+            background-color: #e5e5f7;
+            background-image:  linear-gradient(30deg, #f7514580 12%, transparent 12.5%, transparent 87%, #f7514580 87.5%, #f7514555), linear-gradient(150deg, #f7514573 12%, transparent 12.5%, transparent 87%, #f7514580 87.5%, #f751456e), linear-gradient(30deg, #f7514569 12%, transparent 12.5%, transparent 87%, #f7514569 87.5%, #f7514569), linear-gradient(150deg, #f7514569 12%, transparent 12.5%, transparent 87%, #f7514569 87.5%, #f7514569), linear-gradient(60deg, #f7524577 25%, transparent 25.5%, transparent 75%, #f7524577 75%, #f7524577), linear-gradient(60deg, #f7524577 25%, transparent 25.5%, transparent 75%, #f7524577 75%, #f7524577);
+            background-size: 20px 35px;
+            background-position: 0 0, 0 0, 10px 18px, 10px 18px, 0 0, 10px 18px;
+        }
+        .logform {
+            display: flex;
+            margin-top: 70px;
+            background: rgba(255, 255, 255, 0.6);
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .admintitle {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: white;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0px 1px 6px  rgba(0, 0, 0, 0.6);
+
+        }
+        button {
+            background: none;
+            border-style: solid;
+            border-width: 0.15rem;
+            width: 100px;
+            padding: 5px;
+            font-size: large;
+            border-radius: 8px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        button:hover{
+            border-color: red;
+            color: red;
+        }
+        .login-title {
+            display: flex;
+            justify-content: center;
+            border-bottom: solid;
+        }
+        input {
+            border-radius: 4px;
+            border: none;
+            height: 20px;
+        }
+        .logininfo1 {
+            margin-top: 10px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .logininfo2 {
+            display: flex;
+            justify-content: space-between;
+        }
+        .itext {
+            margin: 0px;
+        }
+        img {
+            height: 40px;
+        }
+        .butt {
+            display: flex;
+            justify-content: center;
+        }
+        label {
+            font-weight: bolder;
+        }
+        #studentFormContainer {
+            margin-top: 70px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+        #studentForm {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="admintitle">
+        <img src="download.jfif" alt="">
+        <h1 class="itext">Admin Panel</h1>
+        <a href="student_register.html"><button id="exit">Exit</button></a>
+        <button onclick="logout()" id="logout">Logout</button>
+    </div>
+    
+
+    <!-- Check if the user is logged in -->
+    <div id="loginForm" class="logform">
+        <div class="login-title">
+            <h2>Login</h2>
+        </div>
+        <div class="logininfo1">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required><br>
+        </div>
+        <div class="logininfo2">
+            <label for="password">Password:</label>
+            <input type="password" id="password" required><br>
+        </div>
+        <div class="butt">
+            <button onclick="login()">Login</button>
+        </div>
+        
+        
+    </div>
+
+    <div id="studentFormContainer" style="display: none;">
+        <!-- Student Information Form -->
+        <form id="studentForm">
+            <label for="name">Student Name:</label>
+            <input type="text" id="name" required><br>
+
+            <label for="college">College:</label>
+            <select id="college" required>
+                <option value="engineering">College of Engineering</option>
+                <option value="nat-sciences">College of Natural and Applied Sciences</option>
+                <option value="man-sciences">College of Management Sciences</option>
+                <option value="env-sciences">College of Environmental Sciences</option>
+            </select><br>
+
+            <label for="department">Department:</label>
+            <select id="department" required>
+                <option data-college="engineering" value="info" disabled>-- Departments for Engineering --</option>
+                <option data-college="engineering" value="mechanical">Mechanical Engineering</option>
+                <option data-college="engineering" value="electrical">Electrical/Electronics & Telecommunications Engineering</option>
+                <option data-college="engineering" value="mechatronics">Mechatronics Engineering</option>
+                <option data-college="engineering" value="biomed">Biomedical Engineering</option>
+                <option data-college="engineering" value="computereng">Computer Engineering</option>
+                <option data-college="engineering" value="civil">Civil & Environmental Engineering</option>
+                
+                <!-- Departments for Natural Sciences -->
+                <option data-college="nat-sciences" value="info" disabled>-- Departments for Natural Sciences --</option>
+                <option data-college="nat-sciences" value="physics">Physics with Electronics</option>
+                <option data-college="nat-sciences" value="maths">Applied Mathematics & Statistics</option>
+                <option data-college="nat-sciences" value="indchemistry">Industrial Chemistry</option>
+                <option data-college="nat-sciences" value="biochemistry">Biochemistry</option>
+                <option data-college="nat-sciences" value="chemistry">Chemistry</option>
+                <option data-college="nat-sciences" value="microbiology">Microbiology</option>
+                <option data-college="nat-sciences" value="aquaculture">Aquaculture & Fisheries Mgt</option>
+                <option data-college="nat-sciences" value="computersci">Computer Science</option>
+                <option data-college="nat-sciences" value="information">Information Technology</option>
+                <option data-college="nat-sciences" value="food">Food Technology</option>
+                <option data-college="nat-sciences" value="biotech">Biotechnology</option>
+                <option data-college="nat-sciences" value="nutrition">Nutrition and Dietetics</option>
+        
+                <!-- Departments for Management Sciences -->
+                <option data-college="man-sciences" value="info" disabled>-- Departments for Management Sciences --</option>
+                <option data-college="man-sciences" value="business">Business Computing</option>
+                <option data-college="man-sciences" value="human">Human Resources Management</option>
+                <option data-college="man-sciences" value="international">International Business</option>
+                <option data-college="man-sciences" value="project">Project management</option>
+                <option data-college="man-sciences" value="transport">Transport Management & Logistics</option>
+                <option data-college="man-sciences" value="accounting">Accounting</option>
+                <option data-college="man-sciences" value="banking">Banking and finance</option>
+                <option data-college="man-sciences" value="economics">Economics</option>
+        
+                <!-- Departments for Environmental Sciences -->
+                <option data-college="env-sciences" value="info" disabled>-- Departments for Environmental Sciences --</option>
+                <option data-college="env-sciences" value="archi">Architecture</option>
+                <option data-college="env-sciences" value="building">Building Technology</option>
+                <option data-college="env-sciences" value="estate">Estate Management</option>
+                <option data-college="env-sciences" value="quantity">Quantity Surveying</option>
+                <option data-college="env-sciences" value="survey">Surveying and Geoinformatics</option>
+                <option data-college="env-sciences" value="urban">Urban and Regional Planning</option>
+            </select><br>
+
+            <label for="year">Year:</label>
+            <select id="year" required>
+                <option value="1">Year 1</option>
+                <option value="2">Year 2</option>
+                <option value="3">Year 3</option>
+                <option value="4">Year 4</option>
+                <option value="4">Year 5</option>
+            </select><br>
+            <div class="add">
+                <button type="button" onclick="addStudent()">Add Student</button>
+                <button type="button" onclick="removeStudent()">Remove Student</button>
+            </div>
+            
+        </form>
+
+        <!-- <button onclick="logout()">Logout</button> -->
+
+        <!-- Display Student List -->
+        <!-- <div id="studentList">
+
+        </div> -->
+    </div>
+
+    <script>
+        let isLoggedIn = false;
+        let sessionTimeout;
+
+        // Check if the user is logged in
+        function checkLogin() {
+            const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+            if (loggedInUser) {
+                isLoggedIn = true;
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("exit").style.display = "none";
+                document.getElementById("studentFormContainer").style.display = "block";
+                document.getElementById("logout").style.display = "block";
+                startSessionTimeout();
+                displayStudents();
+            } else {
+                document.getElementById("loginForm").style.display = "block";
+                document.getElementById("studentFormContainer").style.display = "none";
+                document.getElementById("logout").style.display = "none";
+            }
+        }
+
+        // Login function
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Perform your authentication logic here (e.g., check against stored credentials)
+            if (username === "admin" && password === "admin") {
+                isLoggedIn = true;
+                localStorage.setItem("loggedInUser", JSON.stringify(username));
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("studentFormContainer").style.display = "block";
+                startSessionTimeout();
+                displayStudents();
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+
+        // Logout function
+        function logout() {
+            isLoggedIn = false;
+            clearTimeout(sessionTimeout);
+            localStorage.removeItem("loggedInUser");
+            location.reload();
+        }
+
+        // Start a session timeout timer
+        function startSessionTimeout() {
+            sessionTimeout = setTimeout(() => {
+                logout();
+                alert("Session timed out. Please log in again.");
+            }, 10 * 60 * 1000); // 10 minutes
+        }
+
+        // Retrieve students from localStorage
+        function getStudents() {
+            const students = JSON.parse(localStorage.getItem("students")) || [];
+            return students;
+        }
+
+        // Display the list of students
+        // function displayStudents() {
+        //     const students = getStudents();
+
+        //     // Display the filtered students
+        //     const studentList = document.getElementById("studentList");
+        //     studentList.innerHTML = "<h2>Students:</h2>";
+        //     if (students.length === 0) {
+        //         studentList.innerHTML += "No students found.";
+        //     } else {
+        //         const ul = document.createElement("ul");
+        //         students.forEach(student => {
+        //             const li = document.createElement("li");
+        //             li.textContent = student.name;
+        //             ul.appendChild(li);
+        //         });
+        //         studentList.appendChild(ul);
+        //     }
+        // }
+
+        // Add a student to localStorage
+        function addStudent() {
+            if (!isLoggedIn) {
+                alert("You must be logged in to perform this action.");
+                return;
+            }
+
+            const name = document.getElementById("name").value;
+            const college = document.getElementById("college").value;
+            const department = document.getElementById("department").value;
+            const year = document.getElementById("year").value;
+
+            const students = getStudents();
+
+            // Check if the student with the same name, college, department, and year exists
+            const isDuplicate = students.some(student => {
+                return (
+                    student.name === name &&
+                    student.college === college &&
+                    student.department === department &&
+                    student.year === year
+                );
+            });
+
+            if (isDuplicate) {
+                alert("This student already exists in the same year, department, and college.");
+                return;
+            }
+
+            students.push({ name, college, department, year });
+
+            localStorage.setItem("students", JSON.stringify(students));
+
+            // Clear the form inputs
+            document.getElementById("name").value = "";
+            document.getElementById("college").value = "";
+            document.getElementById("department").value = "";
+            document.getElementById("year").value = "";
+
+            // displayStudents();
+        }
+
+        // Remove a student from localStorage
+        function removeStudent() {
+            if (!isLoggedIn) {
+                alert("You must be logged in to perform this action.");
+                return;
+            }
+
+            const name = document.getElementById("name").value;
+            const college = document.getElementById("college").value;
+            const department = document.getElementById("department").value;
+            const year = document.getElementById("year").value;
+
+            const students = getStudents();
+
+            // Check if the student with the same name, college, department, and year exists
+            const studentToRemove = students.find(student => {
+                return (
+                    student.name === name &&
+                    student.college === college &&
+                    student.department === department &&
+                    student.year === year
+                );
+            });
+
+            if (!studentToRemove) {
+                alert("The specified student does not exist in the selected year, department, and college.");
+                return;
+            }
+
+            const filteredStudents = students.filter(student => {
+                return (
+                    student.name !== name ||
+                    student.college !== college ||
+                    student.department !== department ||
+                    student.year !== year
+                );
+            });
+
+            localStorage.setItem("students", JSON.stringify(filteredStudents));
+
+            // Clear the form inputs
+            document.getElementById("name").value = "";
+            document.getElementById("college").value = "";
+            document.getElementById("department").value = "";
+            document.getElementById("year").value = "";
+
+            // displayStudents();
+        }
+
+        // Check login status on page load
+        window.onload = checkLogin;
+    </script>
+</body>
+</html>
